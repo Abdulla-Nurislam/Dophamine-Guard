@@ -59,33 +59,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   // Quick Stats
                   Row(
                     children: [
-                      const Expanded(
-                        child: QuickStatCard(
-                          icon: LucideIcons.flame,
-                          value: '12',
-                          label: 'дней стрик',
-                          bgColor: Color(0xFFFFF7ED),
-                          iconColor: Color(0xFFEA580C),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => context.go('/profile'),
+                          child: const QuickStatCard(
+                            icon: LucideIcons.flame,
+                            value: '12',
+                            label: 'дней стрик',
+                            bgColor: Color(0xFFFFF7ED),
+                            iconColor: Color(0xFFEA580C),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
-                        child: QuickStatCard(
-                          icon: LucideIcons.clock,
-                          value: '45ч',
-                          label: 'сэкономлено',
-                          bgColor: Color(0xFFEFF6FF),
-                          iconColor: Color(0xFF2563EB),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => context.go('/profile'),
+                          child: const QuickStatCard(
+                            icon: LucideIcons.clock,
+                            value: '45ч',
+                            label: 'сэкономлено',
+                            bgColor: Color(0xFFEFF6FF),
+                            iconColor: Color(0xFF2563EB),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(
-                        child: QuickStatCard(
-                          icon: LucideIcons.award,
-                          value: '18',
-                          label: 'дней детокса',
-                          bgColor: Color(0xFFF5F3FF),
-                          iconColor: Color(0xFF7C3AED),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => context.go('/profile'),
+                          child: const QuickStatCard(
+                            icon: LucideIcons.award,
+                            value: '18',
+                            label: 'дней детокса',
+                            bgColor: Color(0xFFF5F3FF),
+                            iconColor: Color(0xFF7C3AED),
+                          ),
                         ),
                       ),
                     ],
@@ -93,34 +102,43 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   const SizedBox(height: 32),
 
                   // App Usage Section
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ValueListenableBuilder<AppLimitData>(
+                    valueListenable: AppState.appLimits,
+                    builder: (context, limits, _) {
+                      return Column(
                         children: [
-                          const Expanded(
-                            child: Text(
-                              'Использование приложений',
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Expanded(
+                                child: Text(
+                                  'Использование приложений',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              TextButton.icon(
+                                onPressed: _isPremium
+                                    ? () => context.push('/focus-mode')
+                                    : () => context.push('/premium'),
+                                icon: Icon(
+                                  _isPremium ? LucideIcons.zap : LucideIcons.lock,
+                                  size: 14,
+                                ),
+                                label: Text(_isPremium ? 'Фокус' : 'Подробнее'),
+                                style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+                              ),
+                            ],
                           ),
-                          if (!_isPremium)
-                            TextButton.icon(
-                              onPressed: () => context.push('/premium'),
-                              icon: const Icon(LucideIcons.lock, size: 14),
-                              label: const Text('Подробнее'),
-                              style: TextButton.styleFrom(foregroundColor: AppColors.primary),
-                            ),
+                          const SizedBox(height: 16),
+                          AppUsageCard(name: 'Instagram', icon: Icons.camera_alt, usedMinutes: 85, limitMinutes: limits.instagramLimit),
+                          const SizedBox(height: 12),
+                          AppUsageCard(name: 'TikTok', icon: Icons.music_note, usedMinutes: 120, limitMinutes: limits.tiktokLimit),
+                          const SizedBox(height: 12),
+                          AppUsageCard(name: 'YouTube', icon: Icons.play_arrow, usedMinutes: 45, limitMinutes: limits.youtubeLimit),
                         ],
-                      ),
-                      const SizedBox(height: 16),
-                      const AppUsageCard(name: 'Instagram', emoji: '📸', usedMinutes: 85, limitMinutes: 90),
-                      const SizedBox(height: 12),
-                      const AppUsageCard(name: 'TikTok', emoji: '🎵', usedMinutes: 120, limitMinutes: 60),
-                      const SizedBox(height: 12),
-                      const AppUsageCard(name: 'YouTube', emoji: '🎥', usedMinutes: 45, limitMinutes: 120),
-                    ],
+                      );
+                    },
                   ),
                   const SizedBox(height: 32),
 
@@ -130,7 +148,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                   // Quick Actions
                   _buildQuickActions(),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 32),
                 ],
               ),
             ),
@@ -164,7 +182,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text('🌅', style: TextStyle(fontSize: 24)),
+                        const Icon(Icons.wb_sunny, size: 24, color: Colors.white),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -193,6 +211,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 24),
+          
+          Column(
+            children: const [
+              Icon(Icons.local_fire_department, color: Colors.orange, size: 52),
+              SizedBox(height: 8),
+              Text(
+                '12',
+                style: TextStyle(fontSize: 80, fontWeight: FontWeight.bold, color: Colors.white, height: 1.0),
+              ),
+              Text(
+                'дней без срывов',
+                style: TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+          
           const SizedBox(height: 32),
           Container(
             padding: const EdgeInsets.all(24),
@@ -332,11 +367,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            _aiTip('📉', 'Вы сократили экранное время на 18% по сравнению с прошлой неделей'),
+            _aiTip(Icons.trending_down, 'Вы сократили экранное время на 18% по сравнению с прошлой неделей'),
             const SizedBox(height: 8),
-            _aiTip('🌙', 'Наибольшее время в соцсетях — вечером 19:00–22:00. Попробуйте читать книгу в это время'),
+            _aiTip(Icons.nights_stay, 'Наибольшее время в соцсетях — вечером 19:00–22:00. Попробуйте читать книгу в это время'),
             const SizedBox(height: 8),
-            _aiTip('🌟', 'TikTok — самый большой триггер. Рекомендуем снизить лимит до 30 мин/день'),
+            _aiTip(Icons.star, 'TikTok — самый большой триггер. Рекомендуем снизить лимит до 30 мин/день'),
           ],
         ),
       );
@@ -398,10 +433,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _aiTip(String emoji, String text) {
+  Widget _aiTip(IconData icon, String text) {
     return Row(
       children: [
-        Text(emoji, style: const TextStyle(fontSize: 18)),
+        Icon(icon, size: 18, color: Colors.white),
         const SizedBox(width: 10),
         Expanded(child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 13))),
       ],
@@ -424,12 +459,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         const SizedBox(width: 12),
         Expanded(
           child: _QuickAction(
-            icon: LucideIcons.target,
-            title: 'Изменить цель',
-            subtitle: 'Программа',
+            icon: LucideIcons.timer,
+            title: 'Лимиты',
+            subtitle: 'Экранное время',
             color: const Color(0xFFF0FDF4),
             iconColor: const Color(0xFF16A34A),
-            onTap: () => context.go('/goal-setup'),
+            onTap: () => context.push('/change-limit'),
           ),
         ),
         const SizedBox(width: 12),

@@ -20,11 +20,11 @@ class AchievementsScreen extends StatelessWidget {
     const double progress = (unlockedCount / totalCount) * 100;
 
     final achievements = [
-      {'id': 'first_step', 'title': 'Первый шаг', 'icon': '🚶', 'desc': 'Завершите свой первый день детокса', 'unlocked': true, 'date': '2026-03-01'},
-      {'id': '7_days', 'title': 'Неделя свободы', 'icon': '🔥', 'desc': 'Достигните 7-дневного стрика', 'unlocked': true, 'date': '2026-03-08'},
-      {'id': '30_days', 'title': 'Мастер фокуса', 'icon': '⭐', 'desc': 'Достигните 30-дневного стрика', 'unlocked': false},
-      {'id': '100_hours', 'title': 'Хранитель времени', 'icon': '⏳', 'desc': 'Сэкономьте 100 часов', 'unlocked': false},
-      {'id': 'quiz_master', 'title': 'Ученик дзен', 'icon': '🧠', 'desc': 'Пройдите 10 квизов осознанности', 'unlocked': false},
+      {'id': 'first_step', 'title': 'Первый шаг', 'icon': Icons.directions_walk, 'desc': 'Завершите свой первый день детокса', 'unlocked': true, 'date': '2026-03-01'},
+      {'id': '7_days', 'title': 'Неделя свободы', 'icon': Icons.whatshot, 'desc': 'Достигните 7-дневного стрика', 'unlocked': true, 'date': '2026-03-08'},
+      {'id': '30_days', 'title': 'Мастер фокуса', 'icon': Icons.star, 'desc': 'Достигните 30-дневного стрика', 'unlocked': false},
+      {'id': '100_hours', 'title': 'Хранитель времени', 'icon': Icons.hourglass_empty, 'desc': 'Сэкономьте 100 часов', 'unlocked': false},
+      {'id': 'quiz_master', 'title': 'Ученик дзен', 'icon': Icons.psychology, 'desc': 'Пройдите 10 квизов осознанности', 'unlocked': false},
     ];
 
     return Scaffold(
@@ -74,7 +74,7 @@ class AchievementsScreen extends StatelessWidget {
                                 Text('$unlockedCount / $totalCount', style: const TextStyle(color: Colors.white, fontSize: 24)),
                               ],
                             ),
-                            const Text('🏆', style: TextStyle(fontSize: 40)),
+                            const Icon(Icons.emoji_events, size: 40, color: Colors.amber),
                           ],
                         ),
                         const SizedBox(height: 12),
@@ -119,7 +119,14 @@ class AchievementsScreen extends StatelessWidget {
                               children: [
                                 const Text('Текущий стрик', style: TextStyle(color: Color(0xFFFFEDD5), fontSize: 14)),
                                 const SizedBox(height: 4),
-                                Text('$currentStreak 🔥', style: const TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w600)),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('$currentStreak', style: const TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w600)),
+                                    const SizedBox(width: 8),
+                                    const Icon(Icons.whatshot, size: 36, color: Colors.orangeAccent),
+                                  ],
+                                ),
                                 const SizedBox(height: 4),
                                 Text('Лучший: $longestStreak дней', style: const TextStyle(color: Color(0xFFFFEDD5), fontSize: 14)),
                               ],
@@ -140,9 +147,18 @@ class AchievementsScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('До следующей награды', style: TextStyle(color: Colors.white, fontSize: 14)),
-                                  Text(
-                                    currentStreak >= 14 ? 'Достигнуто! 🎉' : '${14 - currentStreak} дней',
-                                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        currentStreak >= 14 ? 'Достигнуто!' : '${14 - currentStreak} дней',
+                                        style: const TextStyle(color: Colors.white, fontSize: 14),
+                                      ),
+                                      if (currentStreak >= 14) ...[
+                                        const SizedBox(width: 8),
+                                        const Icon(Icons.celebration, size: 14, color: Colors.white),
+                                      ]
+                                    ],
                                   ),
                                 ],
                               ),
@@ -232,7 +248,7 @@ class AchievementsScreen extends StatelessWidget {
                     ),
                     child: const Column(
                       children: [
-                        Text('✨', style: TextStyle(fontSize: 36)),
+                        const Icon(Icons.auto_awesome, size: 36, color: Colors.amberAccent),
                         SizedBox(height: 12),
                         Text('Продолжайте!', style: TextStyle(color: Colors.white, fontSize: 20)),
                         SizedBox(height: 8),
@@ -278,7 +294,9 @@ class AchievementsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Center(
-                child: Text(unlocked ? ach['icon'] : '🔒', style: const TextStyle(fontSize: 24)),
+                child: unlocked 
+                    ? Icon(ach['icon'] as IconData, size: 28, color: AppColors.primary)
+                    : const Icon(Icons.lock, size: 28, color: Colors.grey),
               ),
             ),
             const SizedBox(width: 16),

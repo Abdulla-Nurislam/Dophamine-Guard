@@ -12,6 +12,8 @@ import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/settings_screen.dart';
 import '../presentation/screens/block_overlay_screen.dart';
 import '../presentation/screens/quiz_screen.dart';
+import '../presentation/screens/change_limit_screen.dart';
+import '../presentation/screens/focus_mode_screen.dart';
 import '../presentation/widgets/main_shell.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -90,6 +92,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/block-overlay',
       builder: (context, state) => const BlockOverlayScreen(),
+    ),
+    GoRoute(
+      path: '/change-limit',
+      builder: (context, state) => const ChangeLimitScreen(),
+    ),
+    GoRoute(
+      path: '/focus-mode',
+      builder: (context, state) => const FocusModeScreen(),
     ),
   ],
 );

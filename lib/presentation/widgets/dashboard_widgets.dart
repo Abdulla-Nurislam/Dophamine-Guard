@@ -60,14 +60,14 @@ class QuickStatCard extends StatelessWidget {
 // ── App Usage Card ───────────────────────────────────────────
 class AppUsageCard extends StatelessWidget {
   final String name;
-  final String emoji;
+  final IconData icon;
   final int usedMinutes;
   final int limitMinutes;
 
   const AppUsageCard({
     super.key,
     required this.name,
-    required this.emoji,
+    required this.icon,
     required this.usedMinutes,
     required this.limitMinutes,
   });
@@ -99,7 +99,7 @@ class AppUsageCard extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Text(emoji, style: const TextStyle(fontSize: 24)),
+                    Icon(icon, size: 24, color: AppColors.primary),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
@@ -189,7 +189,7 @@ class _DashboardMoodCheckCardState extends State<DashboardMoodCheckCard> {
         children: [
           const Row(
             children: [
-              Text('🌅', style: TextStyle(fontSize: 32)),
+              Icon(Icons.wb_sunny, size: 32, color: Colors.orange),
               SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -206,13 +206,13 @@ class _DashboardMoodCheckCardState extends State<DashboardMoodCheckCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _MoodItem(emoji: '😊', label: 'Отлично', onTap: () => _select('great'))),
+              Expanded(child: _MoodItem(icon: Icons.sentiment_very_satisfied, label: 'Отлично', onTap: () => _select('great'))),
               const SizedBox(width: 8),
-              Expanded(child: _MoodItem(emoji: '🙂', label: 'Хорошо', onTap: () => _select('good'))),
+              Expanded(child: _MoodItem(icon: Icons.sentiment_satisfied, label: 'Хорошо', onTap: () => _select('good'))),
               const SizedBox(width: 8),
-              Expanded(child: _MoodItem(emoji: '😐', label: 'Нормально', onTap: () => _select('okay'))),
+              Expanded(child: _MoodItem(icon: Icons.sentiment_neutral, label: 'Нормально', onTap: () => _select('okay'))),
               const SizedBox(width: 8),
-              Expanded(child: _MoodItem(emoji: '😔', label: 'Не очень', onTap: () => _select('bad'))),
+              Expanded(child: _MoodItem(icon: Icons.sentiment_dissatisfied, label: 'Не очень', onTap: () => _select('bad'))),
             ],
           ),
         ],
@@ -235,7 +235,7 @@ class _DashboardMoodCheckCardState extends State<DashboardMoodCheckCard> {
       ),
       child: const Row(
         children: [
-          Text('✨', style: TextStyle(fontSize: 32)),
+          Icon(Icons.auto_awesome, size: 32, color: Colors.amber),
           SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -250,11 +250,11 @@ class _DashboardMoodCheckCardState extends State<DashboardMoodCheckCard> {
 }
 
 class _MoodItem extends StatelessWidget {
-  final String emoji;
+  final IconData icon;
   final String label;
   final VoidCallback onTap;
 
-  const _MoodItem({required this.emoji, required this.label, required this.onTap});
+  const _MoodItem({required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +272,7 @@ class _MoodItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 24)),
+            Icon(icon, size: 24, color: AppColors.primary),
             const SizedBox(height: 4),
             Text(
               label,

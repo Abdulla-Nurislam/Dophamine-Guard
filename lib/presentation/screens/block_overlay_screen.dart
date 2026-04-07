@@ -39,9 +39,17 @@ class BlockOverlayScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Text(
-                      'Ваш стрик в безопасности 🔥',
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                    const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Ваш стрик в безопасности',
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(width: 8),
+                        Icon(Icons.whatshot, size: 18, color: Colors.orangeAccent),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     const Text(

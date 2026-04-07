@@ -23,7 +23,13 @@ class PremiumScreen extends StatelessWidget {
           if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Подписка "$planName" успешно оформлена! 🎉'),
+              content: Row(
+                children: [
+                  Expanded(child: Text('Подписка "$planName" успешно оформлена!')),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.star, color: Colors.yellow, size: 20),
+                ],
+              ),
               backgroundColor: Colors.green,
             )
           );

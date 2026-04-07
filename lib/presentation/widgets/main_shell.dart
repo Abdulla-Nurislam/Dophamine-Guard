@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_theme.dart';
 
 class MainShell extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -38,6 +39,8 @@ class MainShell extends StatelessWidget {
           backgroundColor: Colors.white,
           selectedFontSize: 12,
           unselectedFontSize: 12,
+          selectedLabelStyle: const TextStyle(fontFamilyFallback: AppTheme.emojiFallback),
+          unselectedLabelStyle: const TextStyle(fontFamilyFallback: AppTheme.emojiFallback),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(LucideIcons.home),

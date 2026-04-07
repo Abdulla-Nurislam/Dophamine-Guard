@@ -112,11 +112,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  _managedAppItem('Instagram', '📸', 60, true),
-                  _managedAppItem('TikTok', '🎵', 45, true),
-                  _managedAppItem('YouTube', '▶️', 30, true),
-                  _managedAppItem('Telegram', '✈️', 120, false),
-                  _managedAppItem('VK', '🔵', 60, false),
+                  _managedAppItem('Instagram', Icons.camera_alt, 60, true),
+                  _managedAppItem('TikTok', Icons.music_note, 45, true),
+                  _managedAppItem('YouTube', Icons.play_arrow, 30, true),
+                  _managedAppItem('Telegram', Icons.send, 120, false),
+                  _managedAppItem('VK', Icons.group, 60, false),
                 ],
               ),
             ),
@@ -318,7 +318,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _managedAppItem(String name, String emoji, int mins, bool initialTracked) {
+  Widget _managedAppItem(String name, IconData icon, int mins, bool initialTracked) {
     bool isTracked = initialTracked;
     return StatefulBuilder(
       builder: (context, setModalState) {
@@ -329,7 +329,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade100), borderRadius: BorderRadius.circular(16)),
             child: Row(
               children: [
-                Text(emoji, style: const TextStyle(fontSize: 24)),
+                Icon(icon, size: 24, color: AppColors.primary),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(

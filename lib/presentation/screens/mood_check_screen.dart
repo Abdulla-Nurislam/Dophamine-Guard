@@ -117,7 +117,7 @@ class _MoodCheckScreenState extends State<MoodCheckScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Header
-        const Text('🌅', style: TextStyle(fontSize: 60)),
+        const Icon(LucideIcons.sun, size: 60, color: Colors.orange),
         const SizedBox(height: 16),
         const Text(
           'Доброе утро!',
@@ -160,7 +160,7 @@ class _MoodCheckScreenState extends State<MoodCheckScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(mood.emoji, style: const TextStyle(fontSize: 48)),
+                    Icon(mood.icon, size: 48, color: mood.gradientColors.first),
                     const SizedBox(height: 12),
                     Text(
                       mood.label,
@@ -217,7 +217,7 @@ class _MoodCheckScreenState extends State<MoodCheckScreen> {
           ),
           child: Column(
             children: [
-              Text(mood.emoji, style: const TextStyle(fontSize: 72)),
+              Icon(mood.icon, size: 72, color: mood.gradientColors.first),
               const SizedBox(height: 16),
               Text(
                 mood.label,

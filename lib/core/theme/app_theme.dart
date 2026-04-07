@@ -6,7 +6,7 @@ import 'app_colors.dart';
 class AppTheme {
   AppTheme._();
 
-  static const _emojiFallback = [
+  static const emojiFallback = [
     'Apple Color Emoji', // iOS
     'Roboto',            // Android
     'Noto Color Emoji',  // Web/Linux
@@ -25,10 +25,15 @@ class AppTheme {
       onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.background,
-    textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme).apply(
+    textTheme: GoogleFonts.montserratTextTheme(ThemeData.light().textTheme).apply(
       bodyColor: AppColors.textMain,
       displayColor: AppColors.textMain,
-      fontFamilyFallback: _emojiFallback,
+      fontFamilyFallback: emojiFallback,
+    ),
+    primaryTextTheme: GoogleFonts.montserratTextTheme(ThemeData.light().primaryTextTheme).apply(
+      bodyColor: AppColors.textMain,
+      displayColor: AppColors.textMain,
+      fontFamilyFallback: emojiFallback,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.background,
@@ -51,10 +56,15 @@ class AppTheme {
       onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.darkBackground,
-    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).apply(
+    textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme).apply(
       bodyColor: AppColors.darkTextMain,
       displayColor: AppColors.darkTextMain,
-      fontFamilyFallback: _emojiFallback,
+      fontFamilyFallback: emojiFallback,
+    ),
+    primaryTextTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().primaryTextTheme).apply(
+      bodyColor: AppColors.darkTextMain,
+      displayColor: AppColors.darkTextMain,
+      fontFamilyFallback: emojiFallback,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.darkBackground,

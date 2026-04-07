@@ -116,10 +116,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         );
                       },
-                      child: Column(
+                      child: SingleChildScrollView(
                         key: ValueKey<int>(_currentSlide),
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                           // Icon Container
                           Container(
                             width: 128,
@@ -170,6 +171,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             textAlign: TextAlign.center,
                           ),
                         ],
+                      ),
                       ),
                     ),
                   ),

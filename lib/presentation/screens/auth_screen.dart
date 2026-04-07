@@ -257,10 +257,11 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ],
                   ),
-                  child: const Center(
-                    child: Text(
-                      '🛡️',
-                      style: TextStyle(fontSize: 40),
+                  child: Center(
+                    child: Icon(
+                      LucideIcons.shield,
+                      size: 40,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
