@@ -6,7 +6,11 @@ import 'app_colors.dart';
 class AppTheme {
   AppTheme._();
 
-  static const _fallbackFonts = ['Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji'];
+  static const _emojiFallback = [
+    'Apple Color Emoji', // iOS
+    'Roboto',            // Android
+    'Noto Color Emoji',  // Web/Linux
+  ];
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -21,16 +25,10 @@ class AppTheme {
       onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.background,
-    textTheme: GoogleFonts.interTextTheme().copyWith(
-      displayLarge: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      displayMedium: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      displaySmall: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodyMedium: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodySmall: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondary).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelSmall: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary).copyWith(fontFamilyFallback: _fallbackFonts),
+    textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme).apply(
+      bodyColor: AppColors.textMain,
+      displayColor: AppColors.textMain,
+      fontFamilyFallback: _emojiFallback,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.background,
@@ -53,16 +51,10 @@ class AppTheme {
       onError: Colors.white,
     ),
     scaffoldBackgroundColor: AppColors.darkBackground,
-    textTheme: GoogleFonts.interTextTheme().copyWith(
-      displayLarge: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      displayMedium: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      displaySmall: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodyMedium: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      bodySmall: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondary).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.darkTextMain).copyWith(fontFamilyFallback: _fallbackFonts),
-      labelSmall: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary).copyWith(fontFamilyFallback: _fallbackFonts),
+    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).apply(
+      bodyColor: AppColors.darkTextMain,
+      displayColor: AppColors.darkTextMain,
+      fontFamilyFallback: _emojiFallback,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.darkBackground,
